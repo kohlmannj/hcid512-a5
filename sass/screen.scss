@@ -1,0 +1,878 @@
+// ---------------------------------------------------------------------------
+// Imports
+
+@import "base";
+
+/* -------------------------------------------------------------------------*/
+/* Layout */
+
+@include establish-baseline($base-font-size);
+
+body {
+    font-family: "Avenir Next", "Avenir", "Helvetica Neue", "Helvetica", sans-serif;
+    background-color: #808080;
+}
+
+#container {
+  @include container;
+  position: relative;
+  // @include susy-grid-background;
+  background-color: #fff;
+}
+
+$navHeight: rhythm(4);
+$navBorderColor: rgba($udubPurple, 1.0);
+$navColor: rgba($udubPurple, 0.75);
+$sectionPadding: rhythm(0.75);
+$lightGray: lighten($udubGray, 10%);
+
+a {
+    color: lighten($udubPurple, 0%);
+    background-color: $lightGray;
+    text-decoration: none;
+
+    &:hover, &:focus {
+        color: #fff;
+        background-color: $udubPurple;
+    }
+}
+
+p a {
+    font-weight: 600;
+}
+
+// #navContainer a, p a {
+//     @include transition-property(color, background-color);
+//     @include transition-duration(0.125s);
+//     @include transition-timing-function(ease-in-out);
+// }
+
+#navContainer {
+    padding: $sectionPadding 0;
+    border-bottom: 1px solid $udubGray;
+    margin-bottom: $sectionPadding;
+}
+
+#dubLogo {
+    width: 160px;
+    height: 64px;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    float: left;
+    background: image-url("logo5.svg") no-repeat center $udubPurple;
+    @include background-size(160px 64px);
+
+    &:hover {
+        background-color: darken($udubPurple, 10%);
+    }
+}
+
+#navWrappers {
+    margin-left: 161px;
+    margin-right: 73px;
+
+    a {
+        @include ellipsis;
+    }
+}
+
+#mainNav {
+    #mainNavInner {
+        display: table;
+        width: 100%;
+        text-align: center;
+        table-layout: fixed;
+        font-size: 18px;
+        line-height: 36px;
+        height: 36px;
+        font-weight: 600;
+        border-bottom: 1px solid #fff;
+
+        a {
+            display: table-cell;
+            border-right: 1px solid #fff;
+            color: $udubPurple;
+            background-color: $udubGray;
+            text-decoration: none;
+
+            &:hover, &:focus, &.active {
+                color: #fff;
+                background-color: $udubPurple;
+            }
+
+            &:last-child {
+                border-right-width: 0;
+            }
+        }
+    }
+}
+
+#secondNav {
+    #secondNavInner {
+        display: table;
+        width: 100%;
+        font-size: 14px;
+        line-height: 27px;
+        height: 27px;
+        text-align: center;
+        table-layout: fixed;
+        font-weight: 500;
+
+        a {
+            display: table-cell;
+            color: #808080;
+            background-color: $lightGray;
+            text-decoration: none;
+            border-right: 1px solid #fff;
+
+            &:last-child {
+                border-right-width: 0;
+            }
+
+            &:hover, &:focus {
+                color: #fff;
+                background-color: #808080;
+            }
+        }
+    }
+}
+
+#uwLogo {
+    float: right;
+    width: 72px;
+    height: 64px;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    margin-top: -64px;
+    background: image-url("W_white.svg") no-repeat center $udubPurple;
+    @include background-size(72px 64px);
+    @include transition-property(color, background-color);
+    @include transition-duration(0.125s);
+    @include transition-timing-function(ease-in-out);
+
+    &:hover {
+        background-color: darken($udubPurple, 10%);
+    }
+}
+
+.item {
+    color: #000;
+    text-decoration: none;
+    background-color: $lightGray;
+    overflow: hidden;
+
+    &.publications {
+        background-color: transparent;
+    }
+
+    em, ul.affiliations {
+        @include adjust-font-size-to(14px);
+    }
+
+    h2 {
+        margin: 0;
+    }
+
+    h3 {
+        font-weight: normal;
+        color: #000;
+    }
+
+    &.professor {
+        .imgWrapper + .wrapper {
+            margin-left: 35%;
+        }
+
+        .imgWrapper {
+            width: 35%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            overflow: hidden;
+
+            img {
+                width: auto;
+                height: 100%;
+                position: absolute;
+                left: -50%;
+                top: -50%;
+                bottom: -50%;
+                right: -50%;
+                margin: auto;
+            }
+        }
+    }
+
+    &.project {
+        img {
+            display: block;
+            width: 75%;
+            height: auto;
+            margin: 0 auto;
+        }
+
+        .imgWrapper {
+            height: 65%;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+        }
+    }
+
+    // .imgWrapper {
+    //     img {
+    //         width: auto;
+    //         height: 100%;
+    //         position: absolute;
+    //         left: -50%;
+    //         top: -50%;
+    //         bottom: -50%;
+    //         right: -50%;
+    //         margin: auto;
+    //     }
+    // }
+
+    .wrapper {
+        padding: gutter(6);
+
+        ul.affiliations {
+            list-style: none;
+            padding: 0;
+
+            li {
+                display: inline;
+
+                &:after {
+                    content: " \00B7 ";
+                }
+
+                &:last-child:after {
+                    content: "";
+                }
+            }
+        }
+    }
+
+    &:last-child {
+        margin: 0;
+    }
+}
+
+a.item {
+    h2 {
+        color: $udubPurple;
+    }
+
+    &:hover {
+        background-color: $udubPurple;
+
+        & {
+            color: rgba(#fff, 0.65);
+        }
+        
+        h2, h3 {
+            color: #fff;
+        }
+
+        img {
+            opacity: 0.85;
+        }
+    }
+}
+
+.papers {
+    padding: 0;
+
+    li {
+        display: inline;
+    }
+
+    a {
+        display: block;
+        margin: 0 (-(gutter(5)));
+        padding: rhythm(0.5) gutter(5) rhythm(0.5);
+        border-bottom: 1px solid #fff;
+        color: #000;
+
+        h3 {
+            font-weight: 600;
+            color: $udubPurple;
+            margin: 0;
+        }
+
+        ul.affiliations {
+            margin: 0;
+        }
+
+        &:hover, &:active {
+            color: rgba(#fff, 0.65);
+
+            h3 {
+                color: #fff;
+            }
+        }
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+hr {
+    width: 100%;
+    // float: left;
+    clear: both;
+    border: 1px solid $udubGray;
+    border-bottom: 0;
+    height: 0;
+    margin: $sectionPadding 0;
+}
+
+#homeContent {
+    @include span-columns($total-columns omega);
+    position: relative;
+
+    #leftCol, #middleCol {
+        width: columns(5);
+        position: absolute;
+        top: 0;
+        bottom: 0;
+    }
+
+    #leftCol.item {
+        margin-bottom: 0;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
+
+        .wrapper {
+            padding-bottom: 0;
+        }
+
+        /* http://css-tricks.com/examples/WebKitScrollbars/ */
+        &::-webkit-scrollbar {
+            width: 12px;
+        }
+         
+        /* Track */
+        &::-webkit-scrollbar-track {
+            // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+        }
+         
+        /* Handle */
+        &::-webkit-scrollbar-thumb {
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+            background: $udubGray;
+            border: 1px solid #fff;
+            // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+        }
+
+        &::-webkit-scrollbar-thumb:window-inactive {
+            background: #fff;
+            border-color: $udubGray;
+        }
+    }
+
+    #middleCol {
+        left: space(5);
+    }
+
+    #rightCol {
+        @include span-columns(6 omega);
+
+        .item {
+            height: 0;
+            padding-bottom: 56.25%;
+            margin-bottom: $sectionPadding;
+            position: relative;
+            float: left;
+            width: 100%;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+#intro {
+    @include span-columns($total-columns - 2 omega);
+    @include pad(1,1);
+    // border-top: 1px solid $udubGray;
+    // border-bottom: 1px solid $udubGray;
+    // margin: $sectionPadding 0;
+    // padding-top: $sectionPadding;
+    // padding-bottom: $sectionPadding;
+    text-align: center;
+
+    p {
+        color: #808080;
+        margin-top: 0;
+        padding: 0;
+        @include adjust-font-size-to(24px);
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        strong {
+            color: #000;
+        }
+    }
+}
+
+.dub {
+    display: inline;
+    background: image-url("logo-black.svg") no-repeat center 25%;
+    @include background-size(100% auto);
+    color: rgba(#000,0) !important;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+h1 .dub {
+    background-position: center 20%;
+}
+
+.teaserContent {
+    display: block;
+    height: 320px;
+    position: relative;
+    overflow: hidden;
+
+    img {
+        width: 100%;
+        height: auto;
+
+        position: absolute;
+        top: -75%;
+        bottom: -25%;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+
+    .wrapper {
+        color: #fff;
+        background-color: rgba(#000, 0.65);
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: rhythm(0.5) gutter();
+
+        h2, h3 {
+            font-weight: 500;
+            margin: 0;
+        }
+    }
+
+    &:hover, &:focus {
+        background-color: $udubPurple;
+
+        img {
+            opacity: 0.65;
+        }
+    }
+}
+
+#eventsContent {
+    #leftCol, #rightCol {
+        @include span-columns($total-columns / 2);
+        height: 480px;
+    }
+
+    #rightCol {
+        @include omega;
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        /* http://css-tricks.com/examples/WebKitScrollbars/ */
+        &::-webkit-scrollbar {
+            width: 12px;
+        }
+         
+        /* Track */
+        &::-webkit-scrollbar-track {
+            // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+        }
+         
+        /* Handle */
+        &::-webkit-scrollbar-thumb {
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+            background: $udubGray;
+            border: 1px solid #fff;
+            // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+        }
+
+        &::-webkit-scrollbar-thumb:window-inactive {
+            background: #fff;
+            border-color: $udubGray;
+        }
+
+        .item {
+            float: left;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%;
+            margin-bottom: $sectionPadding;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+#peopleContent {
+
+    width: 100%;
+    float: left;
+    margin-bottom: rhythm(0.75);
+
+    .person {
+        width: 195px;
+        height: 195px;
+        position: relative;
+        float: left;
+        margin-right: gutter();
+        margin-bottom: rhythm(0.25);
+        overflow: hidden;
+
+        &:hover {
+            background-color: $udubPurple;
+
+            img {
+                opacity: 0.65;
+            }
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
+
+        .wrapper {
+            background-color: rgba(#000, 0.65);
+            color: #fff;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: rhythm(0.25) gutter(4);
+
+            h2, h3 {
+                margin: 0;
+                font-weight: 500;
+            }
+
+            h2 {
+                font-size: 18px;
+            }
+
+            h3 {
+                font-size: 12px;
+                line-height: 14px;
+            }
+        }
+    }
+}
+
+footer {
+    color: #808080;
+    text-align: center;
+    margin-bottom: rhythm(0.75);
+}
+
+/* Mobile Portrait */
+
+@include at-breakpoint(0 30em 8) {
+    // $grid-padding    : 0;
+
+    #container {
+        @include container;
+        padding-top: 130px;
+        // @include susy-grid-background;
+    }
+
+    #navContainer {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        padding: 0;
+        border-bottom: 0;
+    }
+
+    #navWrappers {
+        width: 100%;
+        margin: 0;
+    }
+
+    #mainNav #mainNavInner a {
+        font-size: 16px;
+    }
+
+    #secondNav #secondNavInner a {
+        font-size: 12px;
+    }
+
+    #dubLogo {
+        width: auto;
+        height: 48px;
+        @include background-size(auto 48px);
+        display: block;
+        float: none;
+        margin-right: 55px;
+        margin-bottom: 1px;
+    }
+
+    #uwLogo {
+        width: 54px;
+        height: 48px;
+        margin-top: -(64px + 1px + 48px);
+        @include background-size(auto 48px);
+    }
+
+    #homeContent {
+        #leftCol, #middleCol, #rightCol {
+            height: auto;
+            position: relative;
+            left: 0;
+            margin-bottom: rhythm(0.75);
+            @include span-columns($total-columns omega);
+        }
+
+        #leftCol {
+            overflow-y: visible;
+        }
+
+        #rightCol ul {
+            display: none;
+        }
+    }
+
+    h1 {
+        @include adjust-font-size-to(18px);
+    }
+
+    #intro {
+        @include reset-columns;
+        padding-left: gutter();
+        padding-right: gutter();
+
+        p {
+            @include adjust-font-size-to(15px);
+        }
+    }
+
+    footer {
+        font-size: 14px;
+    }
+
+    #eventsContent {
+        #leftCol, #rightCol {
+            height: auto;
+            @include span-columns($total-columns omega);
+        }
+
+        #leftCol {
+            height: 360px;
+            margin-bottom: rhythm(0.75);
+        }
+
+        #rightCol {
+            background-color: transparent;
+        }
+    }
+}
+
+@include at-breakpoint(0 30em) {
+    .teaserContent {
+        img {
+            height: 100%;
+            width: auto;
+            top: 0;
+            bottom: 0;
+            left: -50%;
+            right: -50%;
+        }
+    }
+}
+
+@include at-breakpoint(30em 48em) {
+    .teaserContent {
+        img {
+            height: auto;
+            width: 100%;
+            top: -50%;
+            bottom: -50%;
+            left: 0;
+            right: 0;
+        }
+    }
+}
+
+/* Mobile Landscape */
+
+@include at-breakpoint(30em 50em 12) {
+    // $grid-padding    : 0;
+
+    #container {
+        @include container;
+        padding-top: 64px + 16px;
+        // @include susy-grid-background;
+    }
+
+    #navContainer {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        padding: 0;
+        border-bottom: 0;
+    }
+
+    #mainNav #mainNavInner a {
+        font-size: 16px;
+    }
+
+    #secondNav #secondNavInner a {
+        font-size: 12px;
+    }
+
+    #intro p {
+        @include adjust-font-size-to(20px);
+        @include adjust-leading-to(1.25);
+    }
+
+    // .teaserContent {
+    //     img {
+    //         height: 100%;
+    //         width: auto;
+    //         top: 0;
+    //         bottom: 0;
+    //         left: -50%;
+    //         right: -50%;
+    //     }
+    // }
+
+    #homeContent {
+        h2 {
+            font-size: 18px;
+        }
+
+        h3 {
+            font-size: $base-font-size;
+        }
+
+        #leftCol, #middleCol {
+            @include span-columns($total-columns / 2);
+            position: relative;
+            left: auto;
+            right: auto;
+            top: auto;
+            bottom: auto;
+            height: 321px;
+        }
+
+        #middleCol {
+            @include omega;
+        }
+
+        #rightCol {
+            @include span-columns($total-columns omega);
+            margin-bottom: rhythm(0.75);
+            // display: none;
+            // @include span-columns($total-columns omega);
+
+            .item ul {
+                display: block;
+            }
+
+            // .item {
+            //     margin-bottom: 0;
+            //     width: 50%;
+            // }
+        }
+    }
+}
+
+@include at-breakpoint(0 50em) {
+    hr {
+        border: 1px solid #fff;
+        border-bottom: 0;
+        height: 0;
+        margin: 8px 0;
+    }
+}
+
+@include at-breakpoint(30em 70em) {
+    .professor.item {
+        ul.affiliations {
+            display: none;
+        }
+    }
+}
+
+@include at-breakpoint(48em 64em) {
+    .break-48em {
+        display: block;
+    }
+}
+
+@include at-breakpoint(30em 70em) {
+    .project.item {
+        h2 {
+            // margin-bottom: 1em;
+        }
+
+        h3 {
+            display: none;
+        }
+    }
+}
+
+@include at-breakpoint(70em $total-columns) {
+    .break-70em {
+        display: block;
+    }
+
+    #intro p {
+        @include adjust-font-size-to(28px);
+    }
+}
+
+// @include at-breakpoint(0 30em 8) {
+//     #container {
+//       @include container;
+//       @include susy-grid-background;
+//     }
+// }
+
+// @include at-breakpoint(30em 64em 12) {
+//     #container {
+//       @include container;
+//       @include susy-grid-background;
+//     }
+// }
